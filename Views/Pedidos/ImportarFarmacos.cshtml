@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "ImportarFarmacos";
+}
+
+<div class="text-center">
+    <h1>Importacion Farmacos</h1>
+    <h2>
+
+        TU SALUD EN MIS MANOS
+
+    </h2>
+</div>
+<h5>
+
+    Ingrese la direccion del Archivo:
+
+</h5>
+
+
+<form method="post" enctype="multipart/form-data" asp-controller="Pedidos" asp-action="ImportarFarmacos">
+
+    <input type="file" class="form-control-file" name="ArchivoCargado" />
+    <br />
+    <input type="submit" value="Agregar" class="form-control-file" />
+
+</form>

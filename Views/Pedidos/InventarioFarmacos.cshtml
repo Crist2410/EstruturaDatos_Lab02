@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EstrusturasDatos_Lab02.Clases.NodoFarmacos>
+
+@{
+    ViewData["Title"] = "InventarioFarmacos";
+}
+
+<h1>InventarioFarmacos</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invetario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Index)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (EstrusturasDatos_Lab02.Clases.NodoFarmacos item in ViewBag.Farmacos) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Invetario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Index)
+            </td>
+            <td>
+                | @Html.ActionLink("Details", "Details", new { id=item }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
