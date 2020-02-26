@@ -10,21 +10,18 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="RealizarPedidos">
+        <form asp-action="CrearPedidos">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NombreCliente" class="control-label"></label>
-                <input asp-for="NombreCliente" class="form-control" />
+            <div class="form-group" >
+                <input asp-for="NombreCliente" class="form-control"style="position:absolute; left: 100px; top:20px"  placeholder="Nombre de Cliente" />
                 <span asp-validation-for="NombreCliente" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
+            <div class="form-group" >
+                <input asp-for="Direccion" class="form-control" style="position:relative; left: 500px; top:80px" placeholder="Dirreccion"/>
                 <span asp-validation-for="Direccion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Nit" class="control-label"></label>
-                <input asp-for="Nit" class="form-control" />
+                <input asp-for="Nit" class="form-control" style="position:relative; left: 800px; top:80px" placeholder="Nit"/>
                 <span asp-validation-for="Nit" class="text-danger"></span>
             </div>
             <div class="form-group">

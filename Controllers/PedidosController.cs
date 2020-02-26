@@ -77,8 +77,8 @@ namespace EstrusturasDatos_Lab02.Controllers
             return View();
         }
 
-        // GET: Pedidos/Create
-        public ActionResult Create()
+        // Realizar Pedido Vista
+        public ActionResult RealizarPedidos()
         {
             return View();
         }

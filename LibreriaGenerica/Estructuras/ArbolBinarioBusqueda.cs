@@ -122,6 +122,18 @@ namespace LibreriaGenerica.Estructuras
                 Insertar(Valor, Delegado, NodoRaiz.Izquierda);
             }
         }
-
+         public List<T> Where(Func<T, bool> Predicate)
+        {
+            var Lista = Mostrar();
+            List<T> ListaResultado = new List<T>();
+            foreach (T item in Lista)
+            {
+                if (Predicate(item))
+                {
+                    ListaResultado.Add(item);
+                }
+            }
+            return ListaResultado;
+        }
     }
 }
