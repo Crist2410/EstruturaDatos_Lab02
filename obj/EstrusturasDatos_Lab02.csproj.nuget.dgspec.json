@@ -1,25 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Crist\\Desktop\\EstrusturasDatos_Lab02\\EstrusturasDatos_Lab02.csproj": {}
+    "C:\\Users\\Jose Giron\\Desktop\\Programas estructuras\\EstruturaDatos_Lab02\\EstrusturasDatos_Lab02.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Crist\\Desktop\\EstrusturasDatos_Lab02\\EstrusturasDatos_Lab02.csproj": {
+    "C:\\Users\\Jose Giron\\Desktop\\Programas estructuras\\EstruturaDatos_Lab02\\EstrusturasDatos_Lab02.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Crist\\Desktop\\EstrusturasDatos_Lab02\\EstrusturasDatos_Lab02.csproj",
+        "projectUniqueName": "C:\\Users\\Jose Giron\\Desktop\\Programas estructuras\\EstruturaDatos_Lab02\\EstrusturasDatos_Lab02.csproj",
         "projectName": "EstrusturasDatos_Lab02",
-        "projectPath": "C:\\Users\\Crist\\Desktop\\EstrusturasDatos_Lab02\\EstrusturasDatos_Lab02.csproj",
-        "packagesPath": "C:\\Users\\Crist\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Crist\\Desktop\\EstrusturasDatos_Lab02\\obj\\",
+        "projectPath": "C:\\Users\\Jose Giron\\Desktop\\Programas estructuras\\EstruturaDatos_Lab02\\EstrusturasDatos_Lab02.csproj",
+        "packagesPath": "C:\\Users\\Jose Giron\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jose Giron\\Desktop\\Programas estructuras\\EstruturaDatos_Lab02\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Jose Giron\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
