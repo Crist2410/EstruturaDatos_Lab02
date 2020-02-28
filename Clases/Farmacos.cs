@@ -8,10 +8,15 @@ namespace EstrusturasDatos_Lab02.Clases
     public class Farmacos
     {
         public int ID { get; set; }
-       public string Nombre { get; set; }
-       public string Descripcion { get; set; }
-       public string Solucion { get; set; }
-       public int Inventario { get; set; }
-       
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public int Inventario { get; set; }
+        public int CantidadComprada { get; set; }
+        public string CasaProductora { get; set; }
+        public double Precio { get; set; }
+        public double PrecioTotal { get; set; }
+
+
+
     }
 }

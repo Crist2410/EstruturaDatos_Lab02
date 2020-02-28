@@ -16,6 +16,29 @@ namespace LibreriaGenerica.Estructuras
         {
             Borrar(Valor, Delegado, Raiz);
         }
+        public void Edit (T Valor, Delegate Delegado)
+        {
+            Nodo<T> NodoPivote = Raiz;
+            Editar(Valor, Delegado, NodoPivote);
+           
+        }
+        private void Editar(T Valor, Delegate Delegado, Nodo<T> NodoRaiz)
+        {
+            if (Convert.ToInt32(Delegado.DynamicInvoke(Valor, NodoRaiz.Valor)) == 0)
+            {
+                NodoRaiz.Valor = Valor;
+            }
+            else if (Convert.ToInt32(Delegado.DynamicInvoke(Valor, NodoRaiz.Valor)) == -1)
+            {
+                Editar(Valor,Delegado,NodoRaiz.Izquierda);
+                
+            }
+            else if (Convert.ToInt32(Delegado.DynamicInvoke(Valor, NodoRaiz.Valor)) == 1)
+            {
+                Editar(Valor, Delegado, NodoRaiz.Derecha);
+            }
+        }
+       
         public T Get(T Valor, Delegate Delegado)
         {
             return Obtener(Valor, Delegado);
@@ -31,8 +54,8 @@ namespace LibreriaGenerica.Estructuras
         {
             if (NodoRaiz.Valor != null)
             {
-                Lista.Add(NodoRaiz.Valor);
                 MostrarRaiz(NodoRaiz.Izquierda, Lista);
+                Lista.Add(NodoRaiz.Valor);
                 MostrarRaiz(NodoRaiz.Derecha, Lista);
             }
         }
@@ -49,14 +72,26 @@ namespace LibreriaGenerica.Estructuras
             else if (Convert.ToInt32(Delegado.DynamicInvoke(Valor, NodoRaiz.Valor)) == 0)
             {
                 Eliminar = NodoRaiz;
+                Nodo<T> NodoSustituto = new Nodo<T>();
                 if (NodoRaiz.Izquierda.Valor == null && NodoRaiz.Derecha.Valor == null)
                 {
                     NodoRaiz = new Nodo<T>();
                 }
+                if (NodoRaiz.Derecha.Valor == null)
+                {
+                    NodoRaiz = NodoRaiz.Izquierda;
+                    while (NodoRaiz.Derecha.Valor != null)
+                    {
+                        NodoSustituto = NodoRaiz;
+                        NodoRaiz = NodoRaiz.Derecha;
+                    }
+                    Eliminar.Valor = NodoRaiz.Valor;
+                    Eliminar = NodoRaiz.Izquierda;
+                    NodoSustituto.Derecha = Eliminar;
+                }
                 else
                 {
                     NodoRaiz = NodoRaiz.Derecha;
-                    Nodo<T> NodoSustituto = new Nodo<T>();
                     while (NodoRaiz.Izquierda.Valor != null)
                     {
                         NodoSustituto = NodoRaiz;

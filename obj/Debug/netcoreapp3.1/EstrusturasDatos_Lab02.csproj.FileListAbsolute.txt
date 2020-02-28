@@ -110,3 +110,4 @@ C:\Users\Crist\Desktop\EstrusturasDatos_Lab02\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\Crist\Desktop\EstrusturasDatos_Lab02\obj\Debug\netcoreapp3.1\Razor\Views\Pedidos\ImportarFarmacos.cshtml.g.cs
 C:\Users\Crist\Desktop\EstrusturasDatos_Lab02\obj\Debug\netcoreapp3.1\Razor\Views\Pedidos\RealizarPedidos.cshtml.g.cs
 C:\Users\Crist\Desktop\EstrusturasDatos_Lab02\obj\Debug\netcoreapp3.1\Razor\Views\Pedidos\InventarioFarmacos.cshtml.g.cs
+C:\Users\Crist\Desktop\EstrusturasDatos_Lab02\obj\Debug\netcoreapp3.1\Razor\Views\Pedidos\AgregarFarmaco.cshtml.g.cs

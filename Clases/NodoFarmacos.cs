@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,16 +10,11 @@ namespace EstrusturasDatos_Lab02.Clases
     {
        public int ID { get; set; }
        public string Nombre { get; set; }
-       public int Invetario { get; set; }
-       public int Index { get; set; }
+       public int Inventario { get; set; }
 
         public Comparison<NodoFarmacos> BuscarID = delegate (NodoFarmacos Far1, NodoFarmacos Far2)
         {
             return Far1.ID.CompareTo(Far2.ID);
-        };
-        public Comparison<NodoFarmacos> BuscarIndex = delegate (NodoFarmacos Far1, NodoFarmacos Far2)
-        {
-            return Far1.Index.CompareTo(Far2.Index);
         };
         public Comparison<NodoFarmacos> BuscarNombre = delegate (NodoFarmacos Far1, NodoFarmacos Far2)
         {
@@ -26,7 +22,7 @@ namespace EstrusturasDatos_Lab02.Clases
         };
         public Comparison<NodoFarmacos> BuscarIventario = delegate (NodoFarmacos Far1, NodoFarmacos Far2)
         {
-            return Far1.Invetario.CompareTo(Far2.Invetario);
+            return Far1.Inventario.CompareTo(Far2.Inventario);
         };
         public int CompareTo(object obj)
         {
