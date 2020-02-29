@@ -107,6 +107,7 @@ namespace LibreriaGenerica.Estructuras
         protected override T Obtener(T Valor, Delegate Delegado)
         {
             Nodo<T> NodoPivote = Raiz;
+            Nodo<T> NoEncontrado = new Nodo<T>();
             while (NodoPivote.Valor != null)
             {
                 if (Convert.ToInt32(Delegado.DynamicInvoke(Valor, NodoPivote.Valor)) == 1)
@@ -117,7 +118,7 @@ namespace LibreriaGenerica.Estructuras
                     }
                     else
                     {
-                        return NodoPivote.Derecha.Valor;
+                        return NoEncontrado.Valor;
                     }
                 }
                 else if (Convert.ToInt32(Delegado.DynamicInvoke(Valor, NodoPivote.Valor)) == -1)
@@ -128,12 +129,16 @@ namespace LibreriaGenerica.Estructuras
                     }
                     else
                     {
-                        return NodoPivote.Derecha.Valor;
+                        return NoEncontrado.Valor;
                     }
+                }
+                else if (Convert.ToInt32(Delegado.DynamicInvoke(Valor, NodoPivote.Valor)) == 0)
+                {
+                    return NodoPivote.Valor;
                 }
                 else
                 {
-                    return NodoPivote.Valor;
+                    return NoEncontrado.Valor;
                 }
             }
             return NodoPivote.Valor;

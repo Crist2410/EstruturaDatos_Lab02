@@ -16,7 +16,5 @@ namespace EstrusturasDatos_Lab02.Clases
         public double Precio { get; set; }
         public double PrecioTotal { get; set; }
 
-
-
     }
 }
