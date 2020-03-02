@@ -13,6 +13,7 @@ namespace EstrusturasDatos_Lab02.Controllers
 {
     public class PedidosController : Controller
     {
+
         public static List<Farmacos> InvetarioFarmacos = new List<Farmacos>();
         public static ArbolBinarioBusqueda<NodoFarmacos> ArbolBusqueda = new ArbolBinarioBusqueda<NodoFarmacos>();
         // GET: Pedidos

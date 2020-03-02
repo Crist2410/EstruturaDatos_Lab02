@@ -110,3 +110,13 @@ C:\Users\Crist\Desktop\EstrusturasDatos_Lab02\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\Crist\Desktop\EstrusturasDatos_Lab02\obj\Debug\netcoreapp3.1\Razor\Views\Pedidos\ImportarFarmacos.cshtml.g.cs
 C:\Users\Crist\Desktop\EstrusturasDatos_Lab02\obj\Debug\netcoreapp3.1\Razor\Views\Pedidos\RealizarPedidos.cshtml.g.cs
 C:\Users\Crist\Desktop\EstrusturasDatos_Lab02\obj\Debug\netcoreapp3.1\Razor\Views\Pedidos\InventarioFarmacos.cshtml.g.cs
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.csprojAssemblyReference.cache
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\staticwebassets\EstrusturasDatos_Lab02.StaticWebAssets.Manifest.cache
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\staticwebassets\EstrusturasDatos_Lab02.StaticWebAssets.xml
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.RazorAssemblyInfo.cache
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.RazorAssemblyInfo.cs
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.AssemblyInfoInputs.cache
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.AssemblyInfo.cs
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.dll
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.pdb
