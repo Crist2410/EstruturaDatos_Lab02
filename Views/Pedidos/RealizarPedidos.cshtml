@@ -4,37 +4,98 @@
     ViewData["Title"] = "RealizarPedidos";
 }
 
-<h1>RealizarPedidos</h1>
-
-<h4>PedidosModel</h4>
+<h1>Realizar Pedidos</h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="RealizarPedidos">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NombreCliente" class="control-label"></label>
-                <input asp-for="NombreCliente" class="form-control" />
-                <span asp-validation-for="NombreCliente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nit" class="control-label"></label>
-                <input asp-for="Nit" class="form-control" />
-                <span asp-validation-for="Nit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<form class="form-inline my-2 my-lg-0" asp-controller="Pedidos" asp-action="AgregarFarmaco">
+    <div style="position:absolute; left: 750px; top: 85px">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="Texto">
+        <button class="btn btn-outline-info my-2 my-sm-0" style="position:absolute; left: 250px; top:0px" type="submit">Buscar</button>
     </div>
-</div>
+ </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="RealizarPedidos">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="NombreCliente" class="form-control" style="position:absolute; left: 0px; top:0px" placeholder="Nombre Del Cliente" required />
+                    <span asp-validation-for="NombreCliente" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Direccion" style=" position: absolute;left: 400px;  top: 0px" placeholder="Dirreccion" class="form-control" required />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Nit" class="form-control" style="position:absolute; left: 800px; top:0px" placeholder="Nit" required />
+                    <span asp-validation-for="Nit" class="text-danger"></span>
+                </div>
+                <table class="table table-striped" style="position:absolute; left: 0px; top:50px; width: 74em">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>
+                                Cantidad Comprada
+                            </th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Descripcion
+                            </th>
+                            <th>
+                                Casa Productora
+                            </th>
+                            <th>
+                                Precio
+                            </th>
+                            <th>
+                                Precio Total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (EstrusturasDatos_Lab02.Clases.Farmacos item in ViewBag.Farmacos)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CantidadComprada)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CasaProductora)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Precio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PrecioTotal)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col">Total</th>
+                            <th scope="col"><input asp-for="Total" class="form-control-plaintext alert-dark" /></th>
+                        </tr>
+                </table>
+                <div class="form-group" style="position:absolute; left: 1000px; top:-70px">
+                    <input type="submit" value="Ralizar Pedido" class="btn btn-outline-dark" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 
