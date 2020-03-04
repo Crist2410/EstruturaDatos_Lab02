@@ -22,7 +22,7 @@ namespace EstrusturasDatos_Lab02.Controllers
         public static string RutaBase;
         public static string RutaArchivoAux;
         private IWebHostEnvironment Environment;
-        public void EditarCSV(NodoFarmacos NodoAuxFarmaco)
+        public void Editar(NodoFarmacos NodoAuxFarmaco)
         {
             using (TextFieldParser Archivo = new TextFieldParser(RutaBase))
             {
@@ -76,60 +76,6 @@ namespace EstrusturasDatos_Lab02.Controllers
                 EditArchivo.Flush();
             }
         }
-        public void Editar(NodoFarmacos NodoAuxFarmaco)
-        {
-            List<Farmacos> ListaAux = new List<Farmacos>();
-
-            using (TextFieldParser Archivo = new TextFieldParser(RutaBase))
-            {
-                Archivo.TextFieldType = FieldType.Delimited;
-                Archivo.SetDelimiters(",");
-                while (!Archivo.EndOfData)
-                {
-                    string[] Texto = Archivo.ReadFields();
-                    try
-                    {
-                        Farmacos FarmacoMostrar = new Farmacos();
-                        FarmacoMostrar.ID = Convert.ToInt32(Texto[0]);
-
-                        if (Texto[1].Contains(','))
-                            FarmacoMostrar.Nombre = "\"" + Texto[1] + "\"";
-                        else
-                            FarmacoMostrar.Nombre = Texto[1];
-                        if (Texto[2].Contains(','))
-                            FarmacoMostrar.Descripcion = "\"" + Texto[2] + "\"";
-                        else
-                            FarmacoMostrar.Descripcion = Texto[2];
-                        if (Texto[3].Contains(','))
-                            FarmacoMostrar.CasaProductora = "\"" + Texto[3] + "\"";
-                        else
-                            FarmacoMostrar.CasaProductora = Texto[3];
-                        FarmacoMostrar.Precio = Convert.ToDouble(Texto[4].Substring(1));
-                        FarmacoMostrar.Inventario = Convert.ToInt32(Texto[5]);
-                        ListaAux.Add(FarmacoMostrar);
-                    }
-                    catch (Exception)
-                    { }
-                }
-
-            }
-            using (var EditArchivo = new StreamWriter(RutaBase))
-            {
-                EditArchivo.WriteLine("id,nombre,descripcion,casa_productora,precio,existencia");
-                foreach (var FarmacoMostrar in ListaAux)
-                {
-                    var Linea = string.Format("{0},{1},{2},{3},${4},{5}", FarmacoMostrar.ID, FarmacoMostrar.Nombre, FarmacoMostrar.Descripcion, FarmacoMostrar.CasaProductora, FarmacoMostrar.Precio, FarmacoMostrar.Inventario);
-                    if (NodoAuxFarmaco.ID == FarmacoMostrar.ID)
-                    {
-                        Linea = string.Format("{0},{1},{2},{3},${4},{5}", FarmacoMostrar.ID, FarmacoMostrar.Nombre, FarmacoMostrar.Descripcion, FarmacoMostrar.CasaProductora, FarmacoMostrar.Precio, NodoAuxFarmaco.Inventario);
-                    }
-                    EditArchivo.WriteLine(Linea);
-                }
-                EditArchivo.Flush();
-            }
-
-        }
-
         public Farmacos ObtenerFarmaco(NodoFarmacos NodoAuxFarmaco)
         {
             Farmacos FarmacoMostrar = new Farmacos();
@@ -235,7 +181,7 @@ namespace EstrusturasDatos_Lab02.Controllers
                     FarmacosVacios.Add(EditarFarmaco);
                     ArbolBusqueda.Delete(EditarFarmaco,EditarFarmaco.BuscarNombre);
                 }
-                EditarCSV(EditarFarmaco);
+                Editar(EditarFarmaco);
                 ViewBag.Farmacos = NuevoPedido.PedidoFarmacos;
                 return View("RealizarPedidos",NuevoPedido);
             }
