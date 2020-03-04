@@ -16,15 +16,14 @@ namespace EstrusturasDatos_Lab02.Controllers
 {
     public class PedidosController : Controller
     {
-
-
-        public static List<Farmacos> InvetarioFarmacos = new List<Farmacos>();
-
+        public static List<NodoFarmacos> InvetarioFarmacos = new List<NodoFarmacos>();
         public static ArbolBinarioBusqueda<NodoFarmacos> ArbolBusqueda = new ArbolBinarioBusqueda<NodoFarmacos>();
         public static List<NodoFarmacos> FarmacosVacios = new List<NodoFarmacos>();
         public static PedidosModel NuevoPedido = new PedidosModel();
         public static string RutaBase;
         private IWebHostEnvironment Environment;
+        Random GenerarRandom = new Random();
+
         public void Editar(NodoFarmacos NodoAuxFarmaco)
         {
             List<Farmacos> ListaAux = new List<Farmacos>();
@@ -76,8 +75,28 @@ namespace EstrusturasDatos_Lab02.Controllers
                 }
                 EditArchivo.Flush();
             }
-
         }
+        public ActionResult Reabastecer()
+        { 
+            ViewBag.Farmacos = FarmacosVacios;
+            return View("ReabastecimientoFar");
+        }
+
+        public ActionResult RalizarReabastecer()
+        {
+
+            foreach (NodoFarmacos item in FarmacosVacios)
+            {
+                int NumeroRandom = GenerarRandom.Next(1, 15);
+                item.Inventario = NumeroRandom;
+                ArbolBusqueda.Add(item, item.BuscarNombre);
+                Editar(item);
+            }
+            FarmacosVacios.Clear();
+            ViewBag.Farmacos = ArbolBusqueda.Mostrar();
+            return View("InventarioFarmacos");
+        }
+
         public Farmacos ObtenerFarmaco(NodoFarmacos NodoAuxFarmaco)
         {
             Farmacos FarmacoMostrar = new Farmacos();
@@ -127,14 +146,30 @@ namespace EstrusturasDatos_Lab02.Controllers
             ViewBag.Farmacos = NuevoPedido.PedidoFarmacos;
             return View(NuevoPedido);
         }
-
+        
         //Vista Importar  AgregarFarmaco
-        public ActionResult CargarFarmacos()
+        public ActionResult CargarFarmacos(int? pagina)
         {
+            
             return View("ImportarFarmacos");
         }
+
+        public ActionResult Paginacion(int? pagina)
+        {
+            var dummyItems = Enumerable.Range(1, InvetarioFarmacos.Count).Select(x => "Item " + x);
+            var pager = new Pager(InvetarioFarmacos.Count, pagina);
+
+            var viewModel = new PaginacionModel
+            {
+                Items = dummyItems.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
+                Pager = pager
+            };
+            return View("View", viewModel);
+        }
+
         public ActionResult AgregarFarmaco(string Texto)
         {
+            
             NodoFarmacos NodoAuxFarmaco = new NodoFarmacos();
             NodoAuxFarmaco.Nombre = Texto;
             NodoAuxFarmaco = ArbolBusqueda.Get(NodoAuxFarmaco, NodoAuxFarmaco.BuscarNombre);
@@ -223,6 +258,7 @@ namespace EstrusturasDatos_Lab02.Controllers
                             NodoFarmaco.Inventario = Convert.ToInt32(Texto[5]);
                             NodoFarmaco.ID = Convert.ToInt32(Texto[0]);
                             ArbolBusqueda.Add(NodoFarmaco, NodoFarmaco.BuscarNombre);
+                            InvetarioFarmacos.Add(NodoFarmaco);
                         }
                         catch (Exception)
                         {

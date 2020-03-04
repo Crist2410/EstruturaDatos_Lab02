@@ -1,0 +1,5 @@
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\LibreriaGenerica\bin\Debug\netcoreapp3.1\LibreriaGenerica.deps.json
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\LibreriaGenerica\bin\Debug\netcoreapp3.1\LibreriaGenerica.dll
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\LibreriaGenerica\obj\Debug\netcoreapp3.1\LibreriaGenerica.csprojAssemblyReference.cache
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\LibreriaGenerica\obj\Debug\netcoreapp3.1\LibreriaGenerica.AssemblyInfoInputs.cache
+C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\LibreriaGenerica\obj\Debug\netcoreapp3.1\LibreriaGenerica.AssemblyInfo.cs
