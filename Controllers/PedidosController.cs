@@ -11,90 +11,74 @@ using EstrusturasDatos_Lab02.Clases;
 using LibreriaGenerica.Estructuras;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.AspNetCore.Hosting;
+using PagedList;
 
 namespace EstrusturasDatos_Lab02.Controllers
 {
     public class PedidosController : Controller
     {
-        public static List<NodoFarmacos> InvetarioFarmacos = new List<NodoFarmacos>();
         public static ArbolBinarioBusqueda<NodoFarmacos> ArbolBusqueda = new ArbolBinarioBusqueda<NodoFarmacos>();
         public static List<NodoFarmacos> FarmacosVacios = new List<NodoFarmacos>();
         public static PedidosModel NuevoPedido = new PedidosModel();
         public static string RutaBase;
+        public static string RutaArchivoAux;
         private IWebHostEnvironment Environment;
-        Random GenerarRandom = new Random();
-
-        public void Editar(NodoFarmacos NodoAuxFarmaco)
+        public void Editar(NodoFarmacos NodoAuxFarmaco, int Borrar)
         {
-            List<Farmacos> ListaAux = new List<Farmacos>();
-
-            using (TextFieldParser Archivo = new TextFieldParser(RutaBase))
+            int NumeroLinea = 1;
+            string Linea;
+            using (StreamReader ArchivoLectura = new StreamReader(RutaBase))
             {
-                Archivo.TextFieldType = FieldType.Delimited;
-                Archivo.SetDelimiters(",");
-                while (!Archivo.EndOfData)
+                using (StreamWriter ArchivoLimpiar = new StreamWriter(RutaArchivoAux))
                 {
-                    string[] Texto = Archivo.ReadFields();
-                    try
-                    {
-                        Farmacos FarmacoMostrar = new Farmacos();
-                        FarmacoMostrar.ID = Convert.ToInt32(Texto[0]);
-
-                        if (Texto[1].Contains(','))
-                            FarmacoMostrar.Nombre = "\"" + Texto[1] + "\"";
-                        else
-                            FarmacoMostrar.Nombre = Texto[1];
-                        if (Texto[2].Contains(','))
-                            FarmacoMostrar.Descripcion = "\"" + Texto[2] + "\"";
-                        else
-                            FarmacoMostrar.Descripcion = Texto[2];
-                        if (Texto[3].Contains(','))
-                            FarmacoMostrar.CasaProductora = "\"" + Texto[3] + "\"";
-                        else
-                            FarmacoMostrar.CasaProductora = Texto[3];
-                        FarmacoMostrar.Precio = Convert.ToDouble(Texto[4].Substring(1));
-                        FarmacoMostrar.Inventario = Convert.ToInt32(Texto[5]);
-                        ListaAux.Add(FarmacoMostrar);
-                    }
-                    catch (Exception)
-                    { }
+                    ArchivoLimpiar.WriteLine(ArchivoLectura.ReadLine());
+                    ArchivoLimpiar.Flush();
                 }
-
-            }
-            using (var EditArchivo = new StreamWriter(RutaBase))
-            {
-                EditArchivo.WriteLine("id,nombre,descripcion,casa_productora,precio,existencia");
-                foreach (var FarmacoMostrar in ListaAux)
+                using (StreamWriter ArchivoEscritura = new StreamWriter(RutaArchivoAux, true))
                 {
-                    var Linea = string.Format("{0},{1},{2},{3},${4},{5}", FarmacoMostrar.ID, FarmacoMostrar.Nombre, FarmacoMostrar.Descripcion, FarmacoMostrar.CasaProductora, FarmacoMostrar.Precio, FarmacoMostrar.Inventario);
-                    if (NodoAuxFarmaco.ID == FarmacoMostrar.ID)
+                    do
                     {
-                        Linea = string.Format("{0},{1},{2},{3},${4},{5}", FarmacoMostrar.ID, FarmacoMostrar.Nombre, FarmacoMostrar.Descripcion, FarmacoMostrar.CasaProductora, FarmacoMostrar.Precio, NodoAuxFarmaco.Inventario);
-                    }
-                    EditArchivo.WriteLine(Linea);
+                        Linea = ArchivoLectura.ReadLine();
+                        if (NumeroLinea == NodoAuxFarmaco.ID)
+                        {
+                            int Posicion = Linea.Length - 1;
+                            if (Borrar > 10)
+                                Posicion = Linea.Length - 2;
+                            Linea = Linea.Substring(0, Posicion);
+                            Linea += NodoAuxFarmaco.Inventario;
+                        }
+                        ArchivoEscritura.WriteLineAsync(Linea);
+                        ArchivoEscritura.Flush();
+                        NumeroLinea++;
+                    } while (Linea != null);
+
                 }
-                EditArchivo.Flush();
             }
+            System.IO.File.Copy(RutaArchivoAux, RutaBase, true);
         }
-        public ActionResult Reabastecer()
-        { 
-            ViewBag.Farmacos = FarmacosVacios;
-            return View("ReabastecimientoFar");
+        public ActionResult Reabastecer(int? Pagina)
+        {
+            List<NodoFarmacos> ListaFamacos = FarmacosVacios;
+            if (Pagina == 0)
+                Pagina = 1;
+            int Cantidad = 12;
+            int NumeroPagina = (Pagina ?? 1);
+            return View("ReabastecimientoFar", ListaFamacos.ToPagedList(NumeroPagina, Cantidad));
         }
 
         public ActionResult RalizarReabastecer()
         {
-
+            Random GenerarRandom = new Random();
             foreach (NodoFarmacos item in FarmacosVacios)
             {
                 int NumeroRandom = GenerarRandom.Next(1, 15);
                 item.Inventario = NumeroRandom;
                 ArbolBusqueda.Add(item, item.BuscarNombre);
-                Editar(item);
+                Editar(item, NumeroRandom);
             }
             FarmacosVacios.Clear();
             ViewBag.Farmacos = ArbolBusqueda.Mostrar();
-            return View("InventarioFarmacos");
+            return View("Index");
         }
 
         public Farmacos ObtenerFarmaco(NodoFarmacos NodoAuxFarmaco)
@@ -110,7 +94,6 @@ namespace EstrusturasDatos_Lab02.Controllers
                     {
                         if (NodoAuxFarmaco.ID == Archivo.LineNumber - 1)
                         {
-
                             string[] Texto = Archivo.ReadFields();
                             FarmacoMostrar.ID = Convert.ToInt32(Texto[0]);
                             FarmacoMostrar.Nombre = Texto[1];
@@ -120,7 +103,6 @@ namespace EstrusturasDatos_Lab02.Controllers
                             FarmacoMostrar.Inventario = Convert.ToInt32(Texto[5]);
                             Archivo.ReadToEnd();
                         }
-                       
                     }
                     catch (Exception)
                     {
@@ -142,47 +124,49 @@ namespace EstrusturasDatos_Lab02.Controllers
         }
         public ActionResult RealizarPedidos()
         {
-            NuevoPedido = new PedidosModel();
             ViewBag.Farmacos = NuevoPedido.PedidoFarmacos;
             return View(NuevoPedido);
         }
-        
+        public ActionResult ConfirmarPedido()
+        {
+            NuevoPedido = new PedidosModel();
+            return View("Index");
+        }
+
         //Vista Importar  AgregarFarmaco
         public ActionResult CargarFarmacos(int? pagina)
         {
-            
+
             return View("ImportarFarmacos");
         }
 
-        public ActionResult Paginacion(int? pagina)
+        public ActionResult Paginacion(int? Pagina)
         {
-            var dummyItems = Enumerable.Range(1, InvetarioFarmacos.Count).Select(x => "Item " + x);
-            var pager = new Pager(InvetarioFarmacos.Count, pagina);
-
-            var viewModel = new PaginacionModel
-            {
-                Items = dummyItems.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
-                Pager = pager
-            };
-            return View("View", viewModel);
+            List<NodoFarmacos> ListaFamacos = ArbolBusqueda.Mostrar();
+            if (Pagina == 0)
+                Pagina = 1;
+            int Cantidad = 12;
+            int NumeroPagina = (Pagina ?? 1);
+            return View("InventarioFarmacos", ListaFamacos.ToPagedList(NumeroPagina, Cantidad));
         }
 
-        public ActionResult AgregarFarmaco(string Texto)
+        public ActionResult BuscarFarmacos(string Texto, IFormCollection collection)
         {
-            
+            NuevoPedido.NombreCliente = collection["NombreCliente"];
+            NuevoPedido.Nit = collection["Nit"];
+            NuevoPedido.Direccion = collection["Direccion"];
             NodoFarmacos NodoAuxFarmaco = new NodoFarmacos();
             NodoAuxFarmaco.Nombre = Texto;
             NodoAuxFarmaco = ArbolBusqueda.Get(NodoAuxFarmaco, NodoAuxFarmaco.BuscarNombre);
             if (NodoAuxFarmaco != null)
             {
-                return View(ObtenerFarmaco(NodoAuxFarmaco));
+                return View("AgregarFarmaco", ObtenerFarmaco(NodoAuxFarmaco));
             }
             else
             {
                 ViewBag.Farmacos = NuevoPedido.PedidoFarmacos;
                 return View("RealizarPedidos", NuevoPedido);
             }
-            
         }
 
         [HttpPost]
@@ -208,7 +192,7 @@ namespace EstrusturasDatos_Lab02.Controllers
                 ArbolBusqueda.Edit(EditarFarmaco, EditarFarmaco.BuscarNombre);
                 //Agrego la Cantidad Caprada al producto
                 FarmacoAux.CantidadComprada += Descontar;
-                FarmacoAux.PrecioTotal = Math.Round(FarmacoAux.Precio * Descontar,2);
+                FarmacoAux.PrecioTotal = Math.Round(FarmacoAux.Precio * Descontar, 2);
                 NuevoPedido.PedidoFarmacos.Add(FarmacoAux);
                 NuevoPedido.Total = 0;
                 foreach (Farmacos item in NuevoPedido.PedidoFarmacos)
@@ -218,11 +202,11 @@ namespace EstrusturasDatos_Lab02.Controllers
                 if (EditarFarmaco.Inventario == 0)
                 {
                     FarmacosVacios.Add(EditarFarmaco);
-                    ArbolBusqueda.Delete(EditarFarmaco,EditarFarmaco.BuscarNombre);
+                    ArbolBusqueda.Delete(EditarFarmaco, EditarFarmaco.BuscarNombre);
                 }
-                Editar(EditarFarmaco);
+                Editar(EditarFarmaco, Descontar);
                 ViewBag.Farmacos = NuevoPedido.PedidoFarmacos;
-                return View("RealizarPedidos",NuevoPedido);
+                return View("RealizarPedidos", NuevoPedido);
             }
             else
             {
@@ -230,20 +214,24 @@ namespace EstrusturasDatos_Lab02.Controllers
             }
         }
 
-
         [HttpPost]
         public IActionResult ImportarFarmacos(IFormFile ArchivoCargado)
         {
             if (ArchivoCargado.FileName.Contains(".csv"))
             {
-                string Ruta = Path.Combine(Environment.WebRootPath,"Documentos/");
+                string Ruta = Path.Combine(Environment.WebRootPath, "Documentos/");
+                RutaArchivoAux = Ruta + "AchivoAux.csv";
+                RutaBase = Path.Combine(Ruta, "ArchivoOriginal.csv");
                 if (!Directory.Exists(Ruta))
                     Directory.CreateDirectory(Ruta);
-                using (FileStream stream = new FileStream(Path.Combine(Ruta, ArchivoCargado.FileName), FileMode.Create))
+                using (FileStream stream = new FileStream(Path.Combine(Ruta, "ArchivoOriginal.csv"), FileMode.Create))
                 {
                     ArchivoCargado.CopyTo(stream);
                 }
-                RutaBase = Ruta + ArchivoCargado.FileName;
+                using (FileStream stream2 = new FileStream(Path.Combine(Ruta, "AchivoAux.csv"), FileMode.Create))
+                {
+                    ArchivoCargado.CopyTo(stream2);
+                }
                 using (TextFieldParser Archivo = new TextFieldParser(RutaBase))
                 {
                     Archivo.TextFieldType = FieldType.Delimited;
@@ -251,78 +239,28 @@ namespace EstrusturasDatos_Lab02.Controllers
                     while (!Archivo.EndOfData)
                     {
                         string[] Texto = Archivo.ReadFields();
-                       NodoFarmacos NodoFarmaco = new NodoFarmacos();
+                        NodoFarmacos NodoFarmaco = new NodoFarmacos();
                         try
                         {
                             NodoFarmaco.Nombre = Texto[1];
                             NodoFarmaco.Inventario = Convert.ToInt32(Texto[5]);
                             NodoFarmaco.ID = Convert.ToInt32(Texto[0]);
                             ArbolBusqueda.Add(NodoFarmaco, NodoFarmaco.BuscarNombre);
-                            InvetarioFarmacos.Add(NodoFarmaco);
                         }
                         catch (Exception)
                         {
                         }
-                    } 
+                    }
                     ViewBag.Farmacos = ArbolBusqueda.Mostrar();
-                    return View("InventarioFarmacos");
+                    return View("Index");
                 }
             }
             else { return View("ImportarFarmacos"); }
         }
 
-        // GET: Pedidos/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-       
 
-        // GET: Pedidos/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: Pedidos/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Pedidos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Pedidos/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

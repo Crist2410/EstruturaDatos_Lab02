@@ -24,7 +24,9 @@
     ".NETCoreApp,Version=v3.1": {
       "EstrusturasDatos_Lab02/1.0.0": {
         "dependencies": {
+          "JW.Pager": "1.0.1",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.1",
+          "PagedList": "1.17.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -313,6 +315,17 @@
         },
         "compile": {
           "EstrusturasDatos_Lab02.dll": {}
+        }
+      },
+      "JW.Pager/1.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/JW.Pager.dll": {
+            "assemblyVersion": "1.0.1.0",
+            "fileVersion": "1.0.1.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/JW.Pager.dll": {}
         }
       },
       "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
@@ -796,6 +809,17 @@
         },
         "compile": {
           "lib/netstandard1.6/NuGet.Frameworks.dll": {}
+        }
+      },
+      "PagedList/1.17.0": {
+        "runtime": {
+          "lib/net40/PagedList.dll": {
+            "assemblyVersion": "1.17.0.0",
+            "fileVersion": "1.17.0.0"
+          }
+        },
+        "compile": {
+          "lib/net40/PagedList.dll": {}
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
@@ -3235,6 +3259,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "JW.Pager/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TXsg2QVGd7qk2goxtKs5sn++/xYpJJn1hVgtZM0M5qQYD0ZU6Z/fXrd0sAFU3CJFeEIhq76NaAfSRU1yqcgpOg==",
+      "path": "jw.pager/1.0.1",
+      "hashPath": "jw.pager.1.0.1.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -3416,6 +3447,13 @@
       "sha512": "sha512-qbXaB76XYUVLocLBs8Z9TS/ERGK2wm797feO+0JEPFvT7o7MRadOR77mqaSD4J1k8G+DlZQyq+MlkCuxrkr3ag==",
       "path": "nuget.frameworks/4.7.0",
       "hashPath": "nuget.frameworks.4.7.0.nupkg.sha512"
+    },
+    "PagedList/1.17.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ou6F3WKXh49hOo0TxWM+SkIGuKllYPuPPvnSYOlQ1sTrtuEyuDUhYbSJd5Sdb06i/sWUJZTjiUecEs3Ht/Hx3g==",
+      "path": "pagedlist/1.17.0",
+      "hashPath": "pagedlist.1.17.0.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",

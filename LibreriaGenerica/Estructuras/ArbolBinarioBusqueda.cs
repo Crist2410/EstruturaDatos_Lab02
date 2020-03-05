@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LibreriaGenerica.Estructuras
 {
-  public class ArbolBinarioBusqueda<T> : Interfaces.EstruturaBaseArbol<T> where T : IComparable
+    public class ArbolBinarioBusqueda<T> : Interfaces.EstruturaBaseArbol<T> where T : IComparable
     {
         Nodo<T> Raiz = new Nodo<T>();
         Nodo<T> Eliminar = new Nodo<T>();
@@ -17,11 +17,11 @@ namespace LibreriaGenerica.Estructuras
         {
             Borrar(Valor, Delegado, Raiz);
         }
-        public void Edit (T Valor, Delegate Delegado)
+        public void Edit(T Valor, Delegate Delegado)
         {
             Nodo<T> NodoPivote = Raiz;
             Editar(Valor, Delegado, NodoPivote);
-           
+
         }
         private void Editar(T Valor, Delegate Delegado, Nodo<T> NodoRaiz)
         {
@@ -31,15 +31,15 @@ namespace LibreriaGenerica.Estructuras
             }
             else if (Convert.ToInt32(Delegado.DynamicInvoke(Valor, NodoRaiz.Valor)) == -1)
             {
-                Editar(Valor,Delegado,NodoRaiz.Izquierda);
-                
+                Editar(Valor, Delegado, NodoRaiz.Izquierda);
+
             }
             else if (Convert.ToInt32(Delegado.DynamicInvoke(Valor, NodoRaiz.Valor)) == 1)
             {
                 Editar(Valor, Delegado, NodoRaiz.Derecha);
             }
         }
-       
+
         public T Get(T Valor, Delegate Delegado)
         {
             return Obtener(Valor, Delegado);
@@ -76,9 +76,10 @@ namespace LibreriaGenerica.Estructuras
                 Nodo<T> NodoSustituto = new Nodo<T>();
                 if (NodoRaiz.Izquierda.Valor == null && NodoRaiz.Derecha.Valor == null)
                 {
-                    NodoRaiz = new Nodo<T>();
+                    Eliminar = new Nodo<T>();
+                    NodoRaiz.Valor = Eliminar.Valor;
                 }
-                if (NodoRaiz.Derecha.Valor == null)
+                else if (NodoRaiz.Derecha.Valor == null)
                 {
                     NodoRaiz = NodoRaiz.Izquierda;
                     while (NodoRaiz.Derecha.Valor != null)
@@ -88,7 +89,10 @@ namespace LibreriaGenerica.Estructuras
                     }
                     Eliminar.Valor = NodoRaiz.Valor;
                     Eliminar = NodoRaiz.Izquierda;
-                    NodoSustituto.Derecha = Eliminar;
+                    if (NodoSustituto.Valor == null)
+                        NodoRaiz.Valor = NodoSustituto.Valor;
+                    else
+                        NodoSustituto.Derecha = Eliminar;
                 }
                 else
                 {
@@ -100,7 +104,10 @@ namespace LibreriaGenerica.Estructuras
                     }
                     Eliminar.Valor = NodoRaiz.Valor;
                     Eliminar = NodoRaiz.Derecha;
-                    NodoSustituto.Izquierda = Eliminar;
+                    if (NodoSustituto.Valor == null)
+                        NodoRaiz.Valor = NodoSustituto.Valor;
+                    else
+                        NodoSustituto.Izquierda = Eliminar;
                 }
             }
         }
@@ -163,7 +170,7 @@ namespace LibreriaGenerica.Estructuras
                 Insertar(Valor, Delegado, NodoRaiz.Izquierda);
             }
         }
-         public List<T> Where(Func<T, bool> Predicate)
+        public List<T> Where(Func<T, bool> Predicate)
         {
             var Lista = Mostrar();
             List<T> ListaResultado = new List<T>();

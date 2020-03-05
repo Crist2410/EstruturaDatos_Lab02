@@ -6,7 +6,7 @@ using EstrusturasDatos_Lab02.Clases;
 
 namespace EstrusturasDatos_Lab02.Models
 {
-    public class PedidosModel : PaginacionModel
+    public class PedidosModel
     {
         public string NombreCliente { get; set; }
         public string Direccion { get; set; }
