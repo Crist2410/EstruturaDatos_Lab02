@@ -112,5 +112,4 @@ C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug
 C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.csproj.CopyComplete
 C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.dll
 C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.pdb
-C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\EstrusturasDatos_Lab02.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Jose Giron\Desktop\Programas estructuras\EstruturaDatos_Lab02\obj\Debug\netcoreapp3.1\Razor\Views\Pedidos\View.cshtml.g.cs
