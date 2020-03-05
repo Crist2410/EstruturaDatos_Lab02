@@ -6045,24 +6045,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Jose Giron\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Crist\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jose Giron\\Desktop\\Programas estructuras\\EstruturaDatos_Lab02\\EstrusturasDatos_Lab02.csproj",
+      "projectUniqueName": "C:\\Users\\Crist\\Desktop\\EstruturaDatos_Lab02\\EstrusturasDatos_Lab02.csproj",
       "projectName": "EstrusturasDatos_Lab02",
-      "projectPath": "C:\\Users\\Jose Giron\\Desktop\\Programas estructuras\\EstruturaDatos_Lab02\\EstrusturasDatos_Lab02.csproj",
-      "packagesPath": "C:\\Users\\Jose Giron\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jose Giron\\Desktop\\Programas estructuras\\EstruturaDatos_Lab02\\obj\\",
+      "projectPath": "C:\\Users\\Crist\\Desktop\\EstruturaDatos_Lab02\\EstrusturasDatos_Lab02.csproj",
+      "packagesPath": "C:\\Users\\Crist\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Crist\\Desktop\\EstruturaDatos_Lab02\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Jose Giron\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -6125,7 +6126,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'PagedList 1.17.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "message": "El paquete \"PagedList 1.17.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "PagedList",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
